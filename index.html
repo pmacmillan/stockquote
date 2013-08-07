@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Stock Quote</title>
+  </head>
+  <body ng-app="stockQuote" ng-cloak>
+
+    <table ng-controller="StockListController">
+      <thead>
+        <tr>
+          <td>Symbol</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="row in data">
+          <td>{{ row.symbol }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <form ng-controller="AddSymbolFormController" ng-submit="addStock()">
+      <p>
+        <label for="stock-symbol">Symbol</label>
+        <input type="text" id="stock-symbol" ng-model="stock.symbol">
+      </p>
+
+      <p>
+        <button type="submit">Add</button>
+      </p>
+    </form>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+
+    <script src="app.js"></script>
+  </body>
+</html>
