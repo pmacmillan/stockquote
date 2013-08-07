@@ -4,24 +4,23 @@ var app = angular.module('stockQuote', []);
 
 
 app.service('UserStocks', function() {
-  return {
-    data: [
-      { symbol: 'GME', qty: 100, price: 47.50, comm: 9.99 },
-      { symbol: 'MSFT', qty: 200, price: 31.25, comm: 9.99 }
-    ],
+  this.data = [
+    { symbol: 'GME', qty: 100, price: 47.50, comm: 9.99 },
+    { symbol: 'MSFT', qty: 200, price: 31.25, comm: 9.99 }
+  ];
 
-    add: function(symbol) {
-      this.data.push({
-        symbol: symbol, qty: 0, price: 0, comm: 0
-      });
-    },
 
-    remove: function(row) {
-      var index = this.data.indexOf(row);
+  this.add = function(symbol) {
+    this.data.push({
+      symbol: symbol, qty: 0, price: 0, comm: 0
+    });
+  };
 
-      if (~index) {
-        this.data.splice(index, 1);
-      }
+  this.remove = function(row) {
+    var index = this.data.indexOf(row);
+
+    if (~index) {
+      this.data.splice(index, 1);
     }
   };
 });
