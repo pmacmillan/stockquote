@@ -2,59 +2,69 @@
 <html lang="en">
   <head>
     <title>Stock Quote</title>
+
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/css/bootstrap.min.css">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
   </head>
   <body ng-app="stockQuote" ng-cloak>
 
-    <table ng-controller="StockListController" border="1" cellpadding="5" cellspacing="0">
-      <thead>
-        <tr>
-          <td>Symbol</td>
-          <td>QTY</td>
-          <td>Price</td>
-          <td>Current</td>
-          <td>Comm</td>
-          <td>Book</td>
-          <td>Market</td>
-          <td></td>
-        </tr>
-      </thead>
-      <tbody ng-show="data.length <= 0">
-        <tr>
-          <td colspan="6">No data</td>
-        </tr>
-      </tbody>
-      <tbody ng-show="data.length > 0">
-        <tr ng-repeat="row in data">
-          <td>{{ row.symbol }}</td>
-          <td><input type="text" ng-model="row.qty"></td>
-          <td><input type="text" ng-model="row.price"></td>
-          <td>{{ row.current | currency }}</td>
-          <td><input type="text" ng-model="row.comm"></td>
-          <td>{{ valueOf(row) | currency }}</td>
-          <td>{{ marketValueOf(row) | currency }}</td>
-          <td><button type="button" ng-click="remove(row)">Remove</button>
-          <td><button type="button" ng-click="update(row)">Update</button>
-        </tr>
-        <tfoot>
+    <div class="container">
+      <table class="table" ng-controller="StockListController">
+        <thead>
           <tr>
-            <td colspan="5">Total</td>
-            <td>{{ bookValue() | currency }}</td>
-            <td>{{ marketValue() | currency }}</td>
+            <th>Symbol</th>
+            <th>QTY</th>
+            <th>Price</th>
+            <th>Current</th>
+            <th>Comm</th>
+            <th>Book</th>
+            <th>Market</th>
+            <th></th>
           </tr>
-        </tfoot>
-      </tbody>
-    </table>
+        </thead>
+        <tbody ng-show="data.length <= 0">
+          <tr>
+            <td colspan="6">No data</td>
+          </tr>
+        </tbody>
+        <tbody ng-show="data.length > 0">
+          <tr ng-repeat="row in data">
+            <td>{{ row.symbol }}</td>
+            <td><input type="text" ng-model="row.qty"></td>
+            <td><input type="text" ng-model="row.price"></td>
+            <td>{{ row.current | currency }}</td>
+            <td><input type="text" ng-model="row.comm"></td>
+            <td>{{ valueOf(row) | currency }}</td>
+            <td>{{ marketValueOf(row) | currency }}</td>
+            <td>
+              <button type="button" ng-click="remove(row)" class="btn btn-mini btn-danger"><i class="icon-remove"></i></button>
+              <button type="button" ng-click="update(row)" class="btn btn-mini btn-default"><i class="icon-refresh"></i></button>
+            </td>
+          </tr>
+          <tfoot>
+            <tr>
+              <td colspan="5">Total</td>
+              <td>{{ bookValue() | currency }}</td>
+              <td>{{ marketValue() | currency }}</td>
+            </tr>
+          </tfoot>
+        </tbody>
+      </table>
 
-    <form ng-controller="AddSymbolFormController" ng-submit="addStock()">
-      <p>
-        <label for="stock-symbol">Symbol</label>
-        <input type="text" id="stock-symbol" ng-model="stock.symbol">
-      </p>
+      <form ng-controller="AddSymbolFormController" ng-submit="addStock()" class="form-horizontal">
+        <div class="form-group">
+          <div class="col-lg-4">
+            <div class="input-group">
+              <input type="text" id="stock-symbol" ng-model="stock.symbol" class="form-control input-small" placeholder="AAPL">
+              <span class="input-group-btn">
+                <button type="submit" class="btn btn-small btn-primary"><i class="icon-plus"></i></button>
+              </span>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
 
-      <p>
-        <button type="submit">Add</button>
-      </p>
-    </form>
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
