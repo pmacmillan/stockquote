@@ -11,8 +11,10 @@
           <td>Symbol</td>
           <td>QTY</td>
           <td>Price</td>
+          <td>Current</td>
           <td>Comm</td>
           <td>Book</td>
+          <td>Market</td>
           <td></td>
         </tr>
       </thead>
@@ -26,10 +28,21 @@
           <td>{{ row.symbol }}</td>
           <td><input type="text" ng-model="row.qty"></td>
           <td><input type="text" ng-model="row.price"></td>
+          <td>{{ row.current | currency }}</td>
           <td><input type="text" ng-model="row.comm"></td>
           <td>{{ valueOf(row) | currency }}</td>
+          <td>{{ marketValueOf(row) | currency }}</td>
+          <td></td>
           <td><button type="button" ng-click="remove(row)">Remove</button>
+          <td><button type="button" ng-click="update(row)">Update</button>
         </tr>
+        <tfoot>
+          <tr>
+            <td colspan="5">Total</td>
+            <td>{{ bookValue() | currency }}</td>
+            <td>{{ marketValue() | currency }}</td>
+          </tr>
+        </tfoot>
       </tbody>
     </table>
 
