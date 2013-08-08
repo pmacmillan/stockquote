@@ -30,10 +30,10 @@
         <tbody ng-show="data.length > 0">
           <tr ng-repeat="row in data">
             <td>{{ row.symbol }}</td>
-            <td><input type="text" ng-model="row.qty"></td>
-            <td><input type="text" ng-model="row.price"></td>
+            <td><input toggle-edit="row.qty" ng-model="row.qty"></td>
+            <td><input toggle-edit="row.price | currency" ng-model="row.price"></td>
             <td>{{ row.current | currency }}</td>
-            <td><input type="text" ng-model="row.comm"></td>
+            <td><input toggle-edit="row.comm | currency" ng-model="row.comm"></td>
             <td>{{ valueOf(row) | currency }}</td>
             <td>{{ marketValueOf(row) | currency }}</td>
             <td>
