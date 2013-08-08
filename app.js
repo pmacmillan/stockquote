@@ -82,7 +82,6 @@ app.controller('StockListController', ['$scope', 'UserStocks', 'Quote', function
       }
 
       row.current = price;
-      console.log(row.current);
     });
   };
 }]);
