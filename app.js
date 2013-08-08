@@ -45,7 +45,7 @@ app.controller('StockListController', ['$scope', 'UserStocks', 'Quote', function
   $scope.data = UserStocks.data;
 
   $scope.valueOf = function(row) {
-    return row.qty * row.price + row.comm;
+    return row.qty * row.price + (+row.comm);
   };
 
   $scope.marketValueOf = function(row) {
@@ -60,7 +60,7 @@ app.controller('StockListController', ['$scope', 'UserStocks', 'Quote', function
 
   $scope.bookValue = function() {
     return UserStocks.data.reduce(function(total, row) {
-      total += row.qty * row.price + row.comm;
+      total += row.qty * row.price + (+row.comm);
       return total;
     }, 0);
   };
