@@ -102,8 +102,7 @@ app.controller('AddSymbolFormController', ['$scope', 'UserStocks', function($sco
 app.directive('toggleEdit', function() {
   return {
     restrict: 'A',
-    template: '<div class="editable-input"><a href="" class="editable-input-label">{{ label }}</a><span class="input"><input type="text" ng-model="value" style="display: none;"></span></div>',
-    transclude: true,
+    template: '<div class="editable-input"><a href="" class="editable-input-label">{{ label }}</a><span class="input"><input type="text" ng-model="value"></span></div>',
     replace: true,
     scope: {
       toggleEdit: '&',
@@ -111,9 +110,9 @@ app.directive('toggleEdit', function() {
     },
     link: function(scope, el, attrs) {
       var $label = el.find('.editable-input-label');
-      var $input = el.find(':input');
+      var $input = el.find(':input').hide();
 
-      $label.on('click', function(ev) {
+      $label.on('focus click', function(ev) {
         $label.toggle(false);
         $input.toggle(true);
 
