@@ -9,26 +9,24 @@
   <body ng-app="stockQuote" ng-cloak>
 
     <div class="container">
-      <table class="table" ng-controller="StockListController">
+      <table class="table table-condensed" ng-controller="StockListController">
         <thead>
           <tr>
             <th>Symbol</th>
             <th>QTY</th>
             <th>Price</th>
             <th>Current</th>
-            <th>Comm</th>
+            <th>Commission</th>
             <th>Book</th>
             <th>Market</th>
             <th></th>
           </tr>
         </thead>
-        <tbody ng-show="data.length <= 0">
-          <tr>
-            <td colspan="6">No data</td>
+        <tbody>
+          <tr ng-show="data.length <= 0">
+            <td colspan="8">No data</td>
           </tr>
-        </tbody>
-        <tbody ng-show="data.length > 0">
-          <tr ng-repeat="row in data">
+          <tr ng-show="data.length > 0" ng-repeat="row in data">
             <td>{{ row.symbol }}</td>
             <td><input toggle-edit="row.qty" ng-model="row.qty"></td>
             <td><input toggle-edit="row.price | currency" ng-model="row.price"></td>
@@ -46,6 +44,7 @@
               <td colspan="5">Total</td>
               <td>{{ bookValue() | currency }}</td>
               <td>{{ marketValue() | currency }}</td>
+              <td></td>
             </tr>
           </tfoot>
         </tbody>
