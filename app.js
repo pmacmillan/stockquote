@@ -19,7 +19,7 @@ app.service('Quote', ['$http', function($http) {
 }]);
 
 
-app.service('UserStocks', function() {
+app.service('UserStocks', function(Quote) {
   this.data = [
     { symbol: 'NYSE:GME', qty: 100, price: 47.50, comm: 9.99 },
     { symbol: 'MSFT', qty: 200, price: 31.25, comm: 9.99 }
@@ -27,8 +27,17 @@ app.service('UserStocks', function() {
 
 
   this.add = function(symbol) {
-    this.data.push({
-      symbol: symbol, qty: 0, price: 0, comm: 0
+    var data = this.data;
+
+    Quote.currentPriceOf(symbol, function(err, price) {
+      if (err) {
+        alert(err);
+        return;
+      }
+
+      data.push({
+        symbol: symbol, qty: 0, price: 0, comm: 0, current: price
+      });
     });
   };
 
